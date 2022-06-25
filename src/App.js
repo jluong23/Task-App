@@ -39,7 +39,13 @@ class App extends Component {
     });
   };
 
-
+  setTasks = (newTasks) => {
+    this.setState({
+      tasks: newTasks,
+      numTasks: newTasks.length,
+    });
+  }
+  
   render() {
     const {task, tasks, numTasks} = this.state;
     return (
@@ -51,7 +57,7 @@ class App extends Component {
             Add Task
           </button>
         </form>
-        <Overview tasks = {tasks} totalTasks = {numTasks} />
+        <Overview tasks = {tasks} totalTasks = {numTasks} setTasks = {this.setTasks}/>
       </div>
     );
   }

@@ -1,32 +1,37 @@
 // Overview.js
 // shows a list of tasks
 
-
 import React, { Component } from "react";
 
-class Overview extends Component {
-  constructor(props) {
-    super(props);
+const Overview = (props) => {
+  const totalTasksDescription =  "Total number of tasks: " + props.totalTasks;
+
+  function handleDeleteTask(id) {
+    const newList = props.tasks.filter((task) => task.id !== id);
+    props.setTasks(newList);
   }
 
-  render() {
-    
-    const { tasks, totalTasks } = this.props;
-    const totalTasksDescription =  "Total number of tasks: " + totalTasks;
-    return (
-      <div>
-        {totalTasksDescription}
-        <ul>
-        {tasks.map((task) => {
-          return <li key = {task.id}>{task.text}</li>;
+  return (
+    <div>
+      {totalTasksDescription}
+      <ul>
+        {props.tasks.map((task) => {
+          return(
+            <li key={task.id}>
+              <span>
+                {task.text}
+              </span>
+              {/* <span> 
+                <button onClick={handleDeleteTask(task.id)}>
+                  {"Delete"}
+                </button>
+              </span> */}
+            </li>
+          )
         })}
-        </ul>
-      </div>
-
-
-
-    );
-  }
-}
+      </ul>
+    </div>
+  );
+};
 
 export default Overview;
