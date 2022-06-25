@@ -13,6 +13,7 @@ class App extends Component {
         id: uniqid(),
       },
       tasks: [],
+      numTasks: 0,
     };
   }
 
@@ -21,7 +22,8 @@ class App extends Component {
       task : {
         text: e.target.value,
         id: this.state.task.id,
-      }
+      },
+      numTasks: this.state.numTasks,
     });
   };
   
@@ -29,6 +31,7 @@ class App extends Component {
     e.preventDefault();
     this.setState({
       tasks: this.state.tasks.concat(this.state.task),
+      numTasks: this.state.numTasks + 1,
       task: {
         text: '',
         id: uniqid(), 
@@ -38,7 +41,7 @@ class App extends Component {
 
 
   render() {
-    const {task, tasks} = this.state;
+    const {task, tasks, numTasks} = this.state;
     return (
       <div>
         <form onSubmit={this.onSubmitTask}>
@@ -48,7 +51,7 @@ class App extends Component {
             Add Task
           </button>
         </form>
-        <Overview tasks = {tasks} />
+        <Overview tasks = {tasks} totalTasks = {numTasks} />
       </div>
     );
   }

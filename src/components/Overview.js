@@ -10,13 +10,21 @@ class Overview extends Component {
   }
 
   render() {
-    const { tasks } = this.props;
+    
+    const { tasks, totalTasks } = this.props;
+    const totalTasksDescription =  "Total number of tasks: " + totalTasks;
     return (
-      <ul>
-      {tasks.map((task) => {
-        return <li key = {task.id}>{task.text}</li>;
-      })}
-      </ul>
+      <div>
+        {totalTasksDescription}
+        <ul>
+        {tasks.map((task) => {
+          return <li key = {task.id}>{task.text}</li>;
+        })}
+        </ul>
+      </div>
+
+
+
     );
   }
 }
