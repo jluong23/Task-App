@@ -11,6 +11,16 @@ const Overview = (props) => {
     props.setTasks(newList);
   }
 
+  function handleEditTask(id, e) {
+    const newList = props.tasks.map((task) => {
+      if(task.id === id){
+        return {text: task.text, id: task.id, edit: !task.edit};
+      }
+      return task;
+    });
+    props.setTasks(newList);
+  }
+
   return (
     <div>
       {totalTasksDescription}
@@ -19,13 +29,18 @@ const Overview = (props) => {
           return(
             <li key={task.id}>
               <span>
-                {task.text}
+                {task.edit ? <input type="text" /> : task.text}
               </span>
-              {/* <span> 
-                <button onClick={handleDeleteTask(task.id)}>
+              <span> 
+                <button onClick={() => handleDeleteTask(task.id)}>
                   {"Delete"}
                 </button>
-              </span> */}
+              </span>
+              <span> 
+                <button onClick={(e) => handleEditTask(task.id, e)}>
+                  {task.edit ? "Save" : "Edit"}
+                </button>
+              </span>
             </li>
           )
         })}
